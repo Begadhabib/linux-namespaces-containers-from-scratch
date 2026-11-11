@@ -1,0 +1,117 @@
+linux-namespaces-lab/
+│
+├── README.md
+│   # Project overview:
+│   # Explains how Linux namespaces and cgroups form the foundation
+│   # of containers, and how the project progressively builds
+│   # toward implementing a minimal container runtime.
+│
+├── 01-pid-namespace/
+│   # Process isolation and PID namespace.
+│   # - Understand Linux processes, PIDs, and parent-child relationships.
+│   # - Create and inspect PID namespaces.
+│   # - Understand PID 1 behavior inside containers.
+│   # - Explore signal handling and zombie process reaping.
+│   # - Understand namespace nesting and /proc behavior.
+│   # - Compare PID namespace behavior with Docker containers.
+│
+├── 02-uts-namespace/
+│   # System identity isolation.
+│   # - Understand the UTS namespace.
+│   # - Create isolated hostnames and domain names.
+│   # - Compare hostname visibility between host and namespace.
+│   # - Understand the difference between hostname and DNS.
+│
+├── 03-user-namespace/
+│   # User and privilege isolation.
+│   # - Understand Linux UIDs, GIDs, and user privileges.
+│   # - Create user namespaces.
+│   # - Explore UID/GID mapping.
+│   # - Understand root inside a namespace vs root on the host.
+│   # - Explore how user namespaces enable rootless containers.
+│
+├── 04-mount-namespace/
+│   # Filesystem view isolation and mount propagation.
+│   # - Understand Linux mounts and mount points.
+│   # - Create isolated mount namespaces.
+│   # - Observe how mount changes affect different namespaces.
+│   # - Explore shared, private, and slave mount propagation.
+│   # - Understand /proc and /sys mounting inside containers.
+│
+├── 05-rootfs/
+│   # Root filesystem isolation.
+│   # - Understand the Linux root filesystem.
+│   # - Build a minimal root filesystem.
+│   # - Explore chroot and its limitations.
+│   # - Understand pivot_root and how it replaces the old root.
+│   # - Explore umount2 and detaching the old root filesystem.
+│   # - Run basic commands inside the isolated root filesystem.
+│
+├── 06-network-namespace/
+│   # Single-container network isolation.
+│   # - Understand Linux network namespaces.
+│   # - Create isolated network environments.
+│   # - Explore network interfaces and loopback.
+│   # - Create and configure veth pairs.
+│   # - Assign IP addresses and configure routing.
+│   # - Connect the namespace to the host.
+│   # - Configure NAT for internet connectivity.
+│
+├── 07-veth-bridge/
+│   # Multi-container networking using Linux bridges.
+│   # - Understand Linux bridges and Layer 2 networking.
+│   # - Create multiple isolated network namespaces.
+│   # - Connect namespaces using veth pairs.
+│   # - Connect multiple veth interfaces to a Linux bridge.
+│   # - Explore ARP and container-to-container communication.
+│   # - Understand the Docker bridge networking model.
+│   # - Compare Docker networking with Kubernetes networking.
+│
+├── 08-cgroups/
+│   # Resource control using cgroups v2.
+│   # - Understand the difference between namespaces and cgroups.
+│   # - Explore the unified cgroup hierarchy.
+│   # - Create and manage cgroups.
+│   # - Limit CPU usage using CPU quota and weight.
+│   # - Control memory consumption and observe OOM behavior.
+│   # - Limit the number of processes using pids.max.
+│   # - Explore I/O limits using io.max.
+│
+├── 09-capabilities/
+│   # Linux capabilities and privilege management.
+│   # - Understand traditional root privileges.
+│   # - Explore how Linux divides privileges into capabilities.
+│   # - Inspect process capabilities.
+│   # - Understand CAP_SYS_ADMIN and CAP_NET_ADMIN.
+│   # - Drop unnecessary capabilities.
+│   # - Understand how container runtimes restrict privileges.
+│
+├── 10-seccomp/
+│   # System call filtering and container security.
+│   # - Understand Linux system calls.
+│   # - Explore seccomp and its filtering modes.
+│   # - Create basic seccomp filters.
+│   # - Allow or deny selected system calls.
+│   # - Observe the behavior of restricted processes.
+│   # - Understand Docker's default seccomp profile.
+│
+├── 11-combined-container/
+│   # Building a minimal container runtime.
+│   # - Combine PID, UTS, user, mount, and network namespaces.
+│   # - Set up an isolated root filesystem.
+│   # - Configure networking and resource limits.
+│   # - Apply capabilities and seccomp restrictions.
+│   # - Launch an isolated process with its own environment.
+│   # - Explore Linux system calls such as clone(), unshare(),
+│   #   mount(), and pivot_root().
+│   # - Progress toward implementing a mini runtime using C or Go.
+│
+└── 12-comparison-with-docker/
+    # Understanding how Docker builds containers.
+    # - Compare manual namespace creation with Docker.
+    # - Compare cgroups and resource management.
+    # - Compare filesystem isolation and rootfs.
+    # - Compare container networking.
+    # - Compare capabilities and seccomp security.
+    # - Understand what Docker adds on top of Linux kernel primitives.
+    # - Identify which components are handled by the container runtime.
